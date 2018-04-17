@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import configparser
-import urllib.request
-import json
 import os
+import requests
 
 
 def show(forecast):
@@ -27,10 +26,8 @@ if os.path.exists(os.path.expanduser(FILE_NAME)):
 else:
     city = DEFAULT_CITY
 
-URL = "http://weather.livedoor.com/forecast/webservice/json/v1?city=" + str(city)
-response = urllib.request.urlopen(URL)
-content = json.loads(response.read().decode("utf8"))
-
+response = requests.get("http://weather.livedoor.com/forecast/webservice/json/v1", params={"city": city})
+content = response.json()
 title = content["title"]
 forecasts = content["forecasts"]
 today = forecasts[0]

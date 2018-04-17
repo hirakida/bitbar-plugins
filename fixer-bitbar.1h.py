@@ -1,19 +1,15 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 
-import urllib.request
-import json
+import requests
 
-base = "USD"
-top = "JPY"
+TOP = "JPY"
 
-URL = "https://api.fixer.io/latest?base=" + base
-
-response = urllib.request.urlopen(URL)
-content = json.loads(response.read().decode("utf8"))
+response = requests.get("https://api.fixer.io/latest", params={"base": "USD"})
+content = response.json()
 rates = content["rates"]
 
-print(top + ":" + str(rates[top]))
+print(TOP + ":" + str(rates[TOP]))
 print("---")
 print("base:" + content["base"])
 print("---")
