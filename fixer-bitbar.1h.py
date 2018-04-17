@@ -9,10 +9,10 @@ response = requests.get("https://api.fixer.io/latest", params={"base": "USD"})
 content = response.json()
 rates = content["rates"]
 
-print(TOP + ":" + str(rates[TOP]))
+print(TOP + ": " + str(rates[TOP]))
 print("---")
-print("base:" + content["base"])
+print("base: " + content["base"])
 print("---")
 
 for key in rates.keys():
-    print(key + ":" + str(rates[key]))
+    print(key + ": " + str(rates[key]))
