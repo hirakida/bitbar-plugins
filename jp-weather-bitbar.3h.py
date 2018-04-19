@@ -10,17 +10,7 @@ FILE_NAME = "~/.bitbarrc"
 DEFAULT_CITY = 130010
 
 
-def show(forecast):
-    print("{0} {1}".format(forecast["dateLabel"], forecast["telop"]))
-    temperature_max = forecast["temperature"]["max"]
-    temperature_min = forecast["temperature"]["min"]
-    if temperature_max:
-        print("Highest {0}°".format(temperature_max["celsius"]))
-    if temperature_min:
-        print("Lowest {0}°".format(temperature_min["celsius"]))
-
-
-def city():
+def load_city():
     if os.path.exists(os.path.expanduser(FILE_NAME)):
         config = configparser.ConfigParser()
         config.read(os.path.expanduser(FILE_NAME))
@@ -29,10 +19,22 @@ def city():
         return DEFAULT_CITY
 
 
+def show(forecast):
+    print("{0} {1}".format(forecast["dateLabel"], forecast["telop"]))
+    temperature_max = forecast["temperature"]["max"]
+    temperature_min = forecast["temperature"]["min"]
+    if temperature_max:
+        print("Highest {0}°".format(temperature_max["celsius"]))
+    if temperature_min:
+        print("Lowest {0}°".format(temperature_min["celsius"]))
+    print("---")
+
+
 def main():
+    city = load_city()
     try:
         response = requests.get("http://weather.livedoor.com/forecast/webservice/json/v1",
-                                params={"city": city()})
+                                params={"city": city})
     except ConnectionError as e:
         print(e.strerror)
         return
@@ -43,6 +45,7 @@ def main():
     tomorrow = forecasts[1]
     if title:
         print(title)
+        print("---")
     if today:
         show(today)
     if tomorrow:
