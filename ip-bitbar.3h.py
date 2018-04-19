@@ -2,21 +2,25 @@
 # -*- coding: utf-8 -*-
 
 import requests
+from requests.exceptions import ConnectionError
 
-response = requests.get("http://ip-api.com/json")
-content = response.json()
-
-print(content["query"])
-print("---")
-print("as: " + content["as"])
-print("isp: " + content["isp"])
-print("org: " + content["org"])
-print("---")
-print("city: " + content["city"])
-print("region: " + content["regionName"])
-print("country: " + content["country"])
-print("timezone: " + content["timezone"])
-print("zip: " + content["zip"])
-print("lat: " + str(content["lat"]))
-print("lon: " + str(content["lon"]))
-print("---")
+try:
+    response = requests.get("http://ip-api.com/json")
+except ConnectionError as e:
+    print(e.strerror)
+else:
+    content = response.json()
+    print(content["query"])
+    print("---")
+    print("as: {0}".format(content["as"]))
+    print("isp: {0}".format(content["isp"]))
+    print("org: {0}".format(content["org"]))
+    print("---")
+    print("city: {0}".format(content["city"]))
+    print("region: {0}".format(content["regionName"]))
+    print("country: {0}".format(content["country"]))
+    print("timezone: {0}".format(content["timezone"]))
+    print("zip: {0}".format(content["zip"]))
+    print("lat: {0}".format(content["lat"]))
+    print("lon: {0}".format(content["lon"]))
+    print("---")
