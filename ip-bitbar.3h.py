@@ -4,11 +4,13 @@
 import requests
 from requests.exceptions import ConnectionError
 
-try:
-    response = requests.get("http://ip-api.com/json")
-except ConnectionError as e:
-    print(e.strerror)
-else:
+
+def main():
+    try:
+        response = requests.get("http://ip-api.com/json")
+    except ConnectionError as e:
+        print(e.strerror)
+        return
     content = response.json()
     print(content["query"])
     print("---")
@@ -24,3 +26,7 @@ else:
     print("lat: {0}".format(content["lat"]))
     print("lon: {0}".format(content["lon"]))
     print("---")
+
+
+if __name__ == '__main__':
+    main()

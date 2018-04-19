@@ -29,11 +29,13 @@ def city():
         return DEFAULT_CITY
 
 
-try:
-    response = requests.get("http://weather.livedoor.com/forecast/webservice/json/v1", params={"city": city()})
-except ConnectionError as e:
-    print(e.strerror)
-else:
+def main():
+    try:
+        response = requests.get("http://weather.livedoor.com/forecast/webservice/json/v1",
+                                params={"city": city()})
+    except ConnectionError as e:
+        print(e.strerror)
+        return
     content = response.json()
     title = content["title"]
     forecasts = content["forecasts"]
@@ -45,3 +47,7 @@ else:
         show(today)
     if tomorrow:
         show(tomorrow)
+
+
+if __name__ == '__main__':
+    main()
