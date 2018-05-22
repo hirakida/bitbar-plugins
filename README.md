@@ -1,6 +1,16 @@
 # bitbar-plugins
 
-## jp-weather-bitbar
+## fixer
+
+https://github.com/fixerAPI/fixer
+
+~/.bitbarrc
+```
+[fixer]
+access_key = YOUR_ACCESS_KEY 
+```
+
+## jp-weather
 
 http://weather.livedoor.com/forecast/rss/primary_area.xml
 
@@ -10,7 +20,7 @@ http://weather.livedoor.com/forecast/rss/primary_area.xml
 city = 130010
 ```
 
-## line-notify-bitbar
+## line-notify
 
 ~/.bitbarrc
 ```
