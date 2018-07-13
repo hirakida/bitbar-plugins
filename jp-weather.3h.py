@@ -1,10 +1,12 @@
-#!/usr/bin/env PYTHONIOENCODING=UTF-8 /usr/local/bin/python3
+#!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
 
 import configparser
+import json
 import os
-import requests
-from requests.exceptions import ConnectionError
+import urllib.request
+import urllib.parse
+import urllib.error
 
 FILE_NAME = "~/.bitbarrc"
 DEFAULT_CITY = 130010
@@ -32,24 +34,27 @@ def show(forecast):
 
 def main():
     city = load_city()
+    url = "http://weather.livedoor.com/forecast/webservice/json/v1"
+    params = urllib.parse.urlencode({"city": city})
+    req = urllib.request.Request("{}?{}".format(url, params))
     try:
-        response = requests.get("http://weather.livedoor.com/forecast/webservice/json/v1",
-                                params={"city": city})
-    except ConnectionError as e:
-        print(e.strerror)
-        return
-    content = response.json()
-    title = content["title"]
-    forecasts = content["forecasts"]
-    today = forecasts[0]
-    tomorrow = forecasts[1]
-    if title:
-        print(title)
-        print("---")
-    if today:
-        show(today)
-    if tomorrow:
-        show(tomorrow)
+        with urllib.request.urlopen(req) as response:
+            content = json.loads(response.read().decode("utf8"))
+            title = content["title"]
+            forecasts = content["forecasts"]
+            today = forecasts[0]
+            tomorrow = forecasts[1]
+            if title:
+                print(title)
+                print("---")
+            if today:
+                show(today)
+            if tomorrow:
+                show(tomorrow)
+    except urllib.error.HTTPError as err:
+        print(err.reason)
+    except urllib.error.URLError as err:
+        print(err.reason)
 
 
 if __name__ == '__main__':
