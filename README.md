@@ -1,19 +1,22 @@
-# bitbar-plugins
+# my-bitbar-plugins
 
-## jp-weather
-
-http://weather.livedoor.com/forecast/rss/primary_area.xml
-
-~/.bitbarrc
-```
-[weather]
-city = 130010
-```
-
-## line-notify
 
 ~/.bitbarrc
 ```
 [line-notify]
-access-token = xxxxxxxx
+access_token = xxxxxxxx
+
+[jp-weather]
+city = 130010
+```
+
+## ExchangeRate
+
+~/.bitbarrc
+```
+[1forge]
+api_key = MY_API_KEY 
+
+[fixer]
+access_key = MY_ACCESS_KEY 
 ```

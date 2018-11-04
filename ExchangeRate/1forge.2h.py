@@ -1,6 +1,4 @@
 #!/usr/local/bin/python3
-# -*- coding: utf-8 -*-
-
 
 import configparser
 import json
@@ -11,23 +9,20 @@ import urllib.error
 from builtins import ValueError
 from datetime import datetime
 
-FILE_NAME = "~/.bitbarrc"
+CONFIG_FILE = "~/.bitbarrc"
 PAIRS = "USDJPY,EURJPY"
 
 
-def load_api_key():
-    if not os.path.exists(os.path.expanduser(FILE_NAME)):
-        raise ValueError("file not found.")
+def get_api_key():
     config = configparser.ConfigParser()
-    config.read(os.path.expanduser(FILE_NAME))
-
+    config.read(os.path.expanduser(CONFIG_FILE))
     if not config.has_option("1forge", "api_key"):
         raise ValueError("api_key not found.")
     return config["1forge"]["api_key"]
 
 
 def main():
-    api_key = load_api_key()
+    api_key = get_api_key()
     url = "http://forex.1forge.com/1.0.3/quotes"
     params = urllib.parse.urlencode({"pairs": PAIRS, "api_key": api_key})
     req = urllib.request.Request("{}?{}".format(url, params))

@@ -1,6 +1,4 @@
 #!/usr/local/bin/python3
-# -*- coding: utf-8 -*-
-
 
 import configparser
 import json
@@ -9,23 +7,20 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
+CONFIG_FILE = "~/.bitbarrc"
 TOP = "JPY"
-FILE_NAME = "~/.bitbarrc"
 
 
-def load_access_key():
-    if not os.path.exists(os.path.expanduser(FILE_NAME)):
-        raise Exception("file not found.")
+def get_access_key():
     config = configparser.ConfigParser()
-    config.read(os.path.expanduser(FILE_NAME))
-
+    config.read(os.path.expanduser(CONFIG_FILE))
     if not config.has_option("fixer", "access_key"):
         raise Exception("access_key not found.")
     return config["fixer"]["access_key"]
 
 
 def main():
-    access_key = load_access_key()
+    access_key = get_access_key()
     url = "http://data.fixer.io/api/latest"
     params = urllib.parse.urlencode({"access_key": access_key})
     req = urllib.request.Request("{}?{}".format(url, params))

@@ -1,5 +1,4 @@
 #!/usr/local/bin/python3
-# -*- coding: utf-8 -*-
 
 import configparser
 import json
@@ -9,21 +8,19 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
-FILE_NAME = "~/.bitbarrc"
+CONFIG_FILE = "~/.bitbarrc"
 
 
-def load_access_token():
-    if not os.path.exists(os.path.expanduser(FILE_NAME)):
-        raise Exception("file not found.")
+def get_access_token():
     config = configparser.ConfigParser()
-    config.read(os.path.expanduser(FILE_NAME))
-    if not config.has_option("line-notify", "access-token"):
-        raise Exception("access-token not found.")
-    return config['line-notify']['access-token']
+    config.read(os.path.expanduser(CONFIG_FILE))
+    if not config.has_option("line-notify", "access_token"):
+        raise Exception("access_token not found.")
+    return config['line-notify']['access_token']
 
 
 def main():
-    access_token = load_access_token()
+    access_token = get_access_token()
     url = "https://notify-api.line.me/api/status"
     headers = {"Authorization": "Bearer " + access_token}
     req = urllib.request.Request(url=url, headers=headers)
