@@ -14,9 +14,9 @@ CONFIG_FILE = "~/.bitbarrc"
 def get_access_token():
     config = configparser.ConfigParser()
     config.read(os.path.expanduser(CONFIG_FILE))
-    if not config.has_option("line-notify", "access_token"):
+    if not config.has_option("line-notify-status", "access_token"):
         raise Exception("access_token not found.")
-    return config['line-notify']['access_token']
+    return config['line-notify-status']['access_token']
 
 
 def main():
