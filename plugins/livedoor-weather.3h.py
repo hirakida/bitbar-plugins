@@ -7,7 +7,7 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
-CONFIG_FILE = "~/.bitbarrc"
+CONFIG_FILE = "~/bitbar/.bitbarrc"
 DEFAULT_CITY = 130010
 
 

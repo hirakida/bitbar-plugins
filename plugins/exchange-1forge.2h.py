@@ -9,7 +9,7 @@ import urllib.error
 from builtins import ValueError
 from datetime import datetime
 
-CONFIG_FILE = "~/.bitbarrc"
+CONFIG_FILE = "~/bitbar/.bitbarrc"
 PAIRS = "USDJPY,EURJPY"
 
 
