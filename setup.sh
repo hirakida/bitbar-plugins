@@ -2,7 +2,7 @@
 
 PLUGINS_DIR="$HOME"/bitbar
 
-cp "$PWD"/.bitbarrc "${PLUGINS_DIR}"/.bitbarrc
+cp -n "$PWD"/.bitbarrc "${PLUGINS_DIR}"/.bitbarrc
 
 PLUGINS=(ip.3h.py livedoor-weather.3h.py)
 for plugin in "${PLUGINS[@]}"; do

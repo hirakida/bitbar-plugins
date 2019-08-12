@@ -16,9 +16,9 @@ PAIRS = "USDJPY,EURJPY"
 def get_api_key():
     config = configparser.ConfigParser()
     config.read(os.path.expanduser(CONFIG_FILE))
-    if not config.has_option("exchange-1forge", "api_key"):
+    if not config.has_option("exchange-rate-1forge", "api_key"):
         raise ValueError("api_key not found.")
-    return config["exchange-1forge"]["api_key"]
+    return config["exchange-rate-1forge"]["api_key"]
 
 
 def main():

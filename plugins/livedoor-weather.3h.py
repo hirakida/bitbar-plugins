@@ -1,4 +1,5 @@
 #!/usr/local/bin/python3
+# coding=utf-8
 
 import configparser
 import json
@@ -18,12 +19,13 @@ def get_city():
 
 
 def show(forecast):
-    print("{0} {1} | color=#333333".format(forecast["dateLabel"], forecast["telop"]))
-    print("---")
+    print("{0} | color=#333333".format(forecast["telop"]))
     temperature_max = forecast["temperature"]["max"]
     temperature_min = forecast["temperature"]["min"]
-    if temperature_max and temperature_min:
-        print("Max:{0}° Min:{1}° | color=#333333".format(temperature_max["celsius"], temperature_min["celsius"]))
+    if temperature_max:
+        print("Max: {0}°C | color=#333333".format(temperature_max["celsius"]))
+    if temperature_min:
+        print("Min: {0}°C | color=#333333".format(temperature_min["celsius"]))
     print("---")
 
 

@@ -1,10 +1,7 @@
 [livedoor-weather]
 city = 400010
 
-[exchange-1forge]
-api_key = MY_API_KEY
-
-[exchange-fixer]
+[exchange-rate]
 access_key = MY_ACCESS_KEY
 
 [line-notify-status]
