@@ -2,9 +2,9 @@
 
 PLUGINS_DIR="$HOME"/bitbar
 
-cp -n "$PWD"/.bitbarrc "${PLUGINS_DIR}"/.bitbarrc
+#cp -n "$PWD"/.bitbarrc "${PLUGINS_DIR}"/.bitbarrc
 
-PLUGINS=(ip.3h.py livedoor-weather.3h.py)
+PLUGINS=(py/livedoor-weather.3h.py)
 for plugin in "${PLUGINS[@]}"; do
-  ln -fs "$PWD"/plugins/"$plugin" "$PLUGINS_DIR"/"$plugin"
+  ln -fs "$PWD"/plugins/"$plugin" "$PLUGINS_DIR"/
 done

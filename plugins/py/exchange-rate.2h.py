@@ -3,9 +3,9 @@
 import configparser
 import json
 import os
-import urllib.request
-import urllib.parse
 import urllib.error
+import urllib.parse
+import urllib.request
 
 CONFIG_FILE = "~/bitbar/.bitbarrc"
 
@@ -44,10 +44,8 @@ def main():
             print_rate(rates, "CNY")
             # for key in rates.keys():
             #     print("{0}: {1} | size=11".format(key, rates[key]))
-    except urllib.error.HTTPError as err:
-        print(err.reason)
-    except urllib.error.URLError as err:
-        print(err.reason)
+    except urllib.error.URLError:
+        pass
 
 
 if __name__ == '__main__':

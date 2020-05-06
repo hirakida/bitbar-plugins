@@ -4,9 +4,9 @@ import configparser
 import json
 import os
 import time
-import urllib.request
-import urllib.parse
 import urllib.error
+import urllib.parse
+import urllib.request
 
 CONFIG_FILE = "~/bitbar/.bitbarrc"
 
@@ -38,10 +38,8 @@ def main():
             str_reset = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(int(reset)))
             print("Reset: {0}".format(str_reset))
             print("---")
-    except urllib.error.HTTPError as err:
-        print(err.reason)
-    except urllib.error.URLError as err:
-        print(err.reason)
+    except urllib.error.URLError:
+        pass
 
 
 if __name__ == '__main__':

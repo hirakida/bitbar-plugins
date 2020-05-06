@@ -1,14 +1,15 @@
 #!/usr/local/bin/python3
 
 import json
-import urllib.request
-import urllib.parse
 import urllib.error
+import urllib.parse
+import urllib.request
 
 
 def main():
+    url = "http://ip-api.com/json"
     try:
-        with urllib.request.urlopen("http://ip-api.com/json") as response:
+        with urllib.request.urlopen(url) as response:
             content = json.loads(response.read().decode("utf8"))
             print(content["query"])
             print("---")
@@ -24,10 +25,8 @@ def main():
             print("lat: {0}".format(content["lat"]))
             print("lon: {0}".format(content["lon"]))
             print("---")
-    except urllib.error.HTTPError as err:
-        print(err.reason)
-    except urllib.error.URLError as err:
-        print(err.reason)
+    except urllib.error.URLError:
+        pass
 
 
 if __name__ == '__main__':
